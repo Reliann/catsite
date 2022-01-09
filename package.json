@@ -1,0 +1,15 @@
+{
+  "name": "catlogs",
+  "version": "1.0.0",
+  "description": "app to log cat's meals",
+  "main": "index.js",
+  "scripts": {
+    "heroku-prebuild": "NODE_ENV=production cd frontend/ && yarn install && yarn build && cd ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "cacheDirectories": [
+    "frontend/node_modules"
+  ],
+  "author": "rell",
+  "license": "ISC"
+}
