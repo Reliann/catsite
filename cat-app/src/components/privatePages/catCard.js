@@ -42,7 +42,7 @@ const CatCard = (props)=>{
             pass = await fetchPass()
         }
         navigator.clipboard.writeText(`Hey! I've registered my cat ${props.cat.cat_name} to catlogs and I would like you 
-        to log whenever you feed them! link to my cat's page: ${window.location.hostname}/#/cats/${props.cat.id} 
+        to log whenever you feed them! link to my cat's page: https://${window.location.hostname}/#/cats/${props.cat.id} 
         and the passkey is ${pass}`)
         setCopied(true)
     }
