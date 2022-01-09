@@ -39,7 +39,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = [env('APP_HOST'),]
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "catlogs.User"
 
