@@ -100,7 +100,7 @@ DATABASES = {
     },
     'production': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
-
+# use local sql server for dev env and PostgreSQL in heroku env
 DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -133,6 +133,7 @@ REST_FRAMEWORK = {
 }
 
 MEDIA_ROOT = BASE_DIR / 'media'
+# diffrent databases, diffrent media roots.
 MEDIA_URL = '/dev_media/' if DEBUG else '/media/' 
 
 
