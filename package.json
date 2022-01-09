@@ -4,7 +4,7 @@
   "description": "app to log cat's meals",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "NODE_ENV=production cd frontend/ && yarn install && yarn build && cd ..",
+    "heroku-prebuild": "NODE_ENV=production cd cat-app/ && npm install && npm run build && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "cacheDirectories": [
