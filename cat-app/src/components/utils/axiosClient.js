@@ -6,7 +6,7 @@ import AuthContext from '../context/authContext'
 //axios.defaults.xsrfCookieName = "csrftoken";
 
 const baseConfig = {
-    baseURL: 'http://localhost:8000/api',
+    baseURL: '/api',
     timeout: 10000,
     xsrfHeaderName: 'X-CSRFToken',
     xsrfCookieName: 'csrftoken',
