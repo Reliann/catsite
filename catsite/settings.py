@@ -54,9 +54,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    'cloudinary',
-    'cloudinary_storage',
     'catlogs.apps.CatlogsConfig',
+    'cloudinary_storage',
+    'cloudinary',
+    
 ]
 
 MIDDLEWARE = [
@@ -164,12 +165,13 @@ SIMPLE_JWT = {
 
 }
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'cat-app/build/static'
+    BASE_DIR / 'cat-app/build/static',
 ]
 
-STATIC_ROOT = BASE_DIR / 'static'
-STATIC_URL = 'static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
