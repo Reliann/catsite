@@ -23,7 +23,7 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 cloudinary.config( 
     cloud_name = env('CLOUD_NAME'), 
@@ -130,8 +130,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
-STATIC_ROOT = BASE_DIR / 'static'
-STATIC_URL = 'static/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
@@ -169,5 +167,10 @@ SIMPLE_JWT = {
 STATICFILES_DIRS = [
     BASE_DIR / 'cat-app/build/static'
 ]
+
+STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = 'static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 django_heroku.settings(locals())
