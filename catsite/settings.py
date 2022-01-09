@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
-
+print(DEBUG)
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/dev_media/' if DEBUG else '/media/' 
 
