@@ -5,49 +5,33 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 # import heroku stuff
-#import django_heroku
+import django_heroku
 # for db url
-#import dj_database_url
+import dj_database_url
 # import env vars
 import environ
-#import os
-
 env = environ.Env()
 environ.Env.read_env()
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': env('CLOUD_NAME'),
     'API_KEY': env('API_KEY'),
     'API_SECRET': env('API_SECRET') ,
 }
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 cloudinary.config( 
     cloud_name = env('CLOUD_NAME'), 
     api_key =  env('API_KEY'),
     api_secret =env('API_SECRET') ,
 )
-
-
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG') == True
-
-ALLOWED_HOSTS = ['*']
-
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = [env('APP_HOST'),]
 AUTH_USER_MODEL = "catlogs.User"
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,12 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    'catlogs.apps.CatlogsConfig',
-    'cloudinary_storage',
     'cloudinary',
-    
+    'cloudinary_storage',
+    'catlogs.apps.CatlogsConfig',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -74,9 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'catsite.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -94,31 +74,15 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'catsite.wsgi.application'
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
     'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'production': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':env('PGDATABASE'),
-        'USER': env('PGUSER'),
-        'PASSWORD': env('PGPASSWORD'),
-        'HOST': env('PGHOST'),
-        'PORT': env('PGPORT'),
-    }
+    'production': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
-
-# use local sql server for dev env and PostgreSQL in heroku env
 DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -133,63 +97,41 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Israel'
-
 USE_I18N = True
-
 USE_TZ = True
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
-
+STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = 'static/'
 MEDIA_ROOT = BASE_DIR / 'media'
-# diffrent databases, diffrent media roots.
-MEDIA_URL = '/dev_media/' if DEBUG else '/media/' 
-
-
+MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
-
     'ALGORITHM': 'HS256',
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
     'JWK_URL': None,
     'LEEWAY': 0,
-
     'AUTH_HEADER_TYPES': ('JWT',),
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
-
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
-
     'JTI_CLAIM': 'jti',
-
 }
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
-    BASE_DIR / 'cat-app/build/static',
+    BASE_DIR / 'cat-app/build/static'
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
