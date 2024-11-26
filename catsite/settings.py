@@ -101,8 +101,16 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'production': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    'production': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ["PGDATABASE"],
+        'USER': os.environ["PGUSER"],
+        'PASSWORD': os.environ["PGPASSWORD"],
+        'HOST': os.environ["PGHOST"],
+        'PORT': os.environ["PGPORT"],
+    }
 }
+
 # use local sql server for dev env and PostgreSQL in heroku env
 DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
 
