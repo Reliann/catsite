@@ -5,18 +5,18 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 # import heroku stuff
-import django_heroku
+#import django_heroku
 # for db url
-import dj_database_url
+#import dj_database_url
 # import env vars
 import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 environ.Env.read_env()
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 CLOUDINARY_STORAGE = {
@@ -101,18 +101,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'default': {
+    'production': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':env("PGDATABASE"),
-        'USER': env("PGUSER"),
-        'PASSWORD': env("PGPASSWORD"),
-        'HOST': env("PGHOST"),
-        'PORT': env("PGPORT"),
-    },
+        'NAME':env('PGDATABASE'),
+        'USER': env('PGUSER'),
+        'PASSWORD': env('PGPASSWORD'),
+        'HOST': env('PGHOST'),
+        'PORT': env('PGPORT'),
+    }
 }
 
 # use local sql server for dev env and PostgreSQL in heroku env
-#DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
+DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -187,4 +187,4 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
