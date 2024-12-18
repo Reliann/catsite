@@ -1,10 +1,17 @@
 [build]
-builder = "nixpacks"
-buildCommand = "create_static"
+  builder = "nixpacks"
+  buildCommand = "create_static"
 
 [deploy]
-startCommand = "gunicorn catsite.wsgi --log-file -"
+  startCommand = "gunicorn catsite.wsgi --log-file -"
 
 [services]
   [services.web]
   command = "python3 manage.py makemigrations --no-input && python3 manage.py migrate --no-input"
+
+[providers]
+  [providers.node]
+  version = "14.x"
+
+  [providers.python]
+  version = "3.9"
