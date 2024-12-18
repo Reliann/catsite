@@ -38,8 +38,8 @@ const HomePage = ()=>{
             <Slide timeout={2250} direction="left" in={true} mountOnEnter unmountOnExit>
                 <Typography variant="body1">
                     <b>Just one accout for all your cats</b> one person needs to sign up,
-                    and create a cat instance, the rest could feed the can feed the cat with a link
-                    provided by the owner, just enter the cats id and passkey and your done!
+                    and create a cat instance, the rest are able to feed the cat with a link
+                    provided by the owner, just enter the cat's id and passkey and your done!
                 </Typography>
             </Slide>
             <Slide timeout={2500} direction="right" in={true} mountOnEnter unmountOnExit>

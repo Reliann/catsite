@@ -1,36 +1,40 @@
 from datetime import timedelta
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 # so I can upload my media somewhere...
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-# import heroku stuff
-import django_heroku
-# for db url
-import dj_database_url
-# import env vars
-import environ
-env = environ.Env()
-environ.Env.read_env()
+
+import logging
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env_file = BASE_DIR / '.env'
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+# Load environment variables from .env file
+load_dotenv(dotenv_path=env_file)
+
+
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': env('CLOUD_NAME'),
-    'API_KEY': env('API_KEY'),
-    'API_SECRET': env('API_SECRET') ,
+    'CLOUD_NAME': os.environ['CLOUD_NAME'],
+    'API_KEY': os.environ['API_KEY'],
+    'API_SECRET': os.environ['API_SECRET'],
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 cloudinary.config( 
-    cloud_name = env('CLOUD_NAME'), 
-    api_key =  env('API_KEY'),
-    api_secret =env('API_SECRET') ,
+    cloud_name = os.environ['CLOUD_NAME'], 
+    api_key =  os.environ['API_KEY'],
+    api_secret = os.environ['API_SECRET'],
 )
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
-ALLOWED_HOSTS = [env('APP_HOST'),]
+DEBUG = os.environ['DEBUG']
+ALLOWED_HOSTS = [os.environ['APP_HOST'],]
 AUTH_USER_MODEL = "catlogs.User"
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -76,11 +80,19 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = 'catsite.wsgi.application'
 DATABASES = {
+    'default': {},
     'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'production': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    'production': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('PGDATABASE', 'default_db_name'),
+        'USER': os.environ.get('PGUSER', 'default_user'),
+        'PASSWORD': os.environ.get('PGPASSWORD', 'default_password'),
+        'HOST': os.environ.get('PGHOST', 'localhost'),
+        'PORT': os.environ.get('PGPORT', '5432'),
+    }
 }
 DATABASES['default'] = DATABASES['dev' if DEBUG else 'production']
 AUTH_PASSWORD_VALIDATORS = [
@@ -134,4 +146,3 @@ SIMPLE_JWT = {
 STATICFILES_DIRS = [
     BASE_DIR / 'cat-app/build/static'
 ]
-django_heroku.settings(locals())
