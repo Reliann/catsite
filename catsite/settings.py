@@ -33,7 +33,7 @@ cloudinary.config(
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+DEBUG = os.environ['DEBUG'] == 'True'
 ALLOWED_HOSTS = [os.environ['APP_HOST'],]
 AUTH_USER_MODEL = "catlogs.User"
 INSTALLED_APPS = [
