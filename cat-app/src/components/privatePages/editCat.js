@@ -1,5 +1,5 @@
 import { Avatar, Button, Container, FormHelperText, TextField, Typography } from "@mui/material"
-import Box from "@mui/system"
+import { Box } from "@mui/system"
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import useAxios from "../utils/axiosClient"
