@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import AuthContext from '../context/authContext'
 
 //axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";

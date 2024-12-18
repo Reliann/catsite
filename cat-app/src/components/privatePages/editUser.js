@@ -29,7 +29,7 @@ const UpdateUser = ()=>{
     const navigate = useNavigate()
     useEffect(()=>{  
         setInputs({...inputs,...user})
-    },[inputs, user])
+    },[])
     const handleInput = (e) =>{
         // to avoid async issues of 2 setStates..
         setMessage({...message,[e.target.name]:[]})

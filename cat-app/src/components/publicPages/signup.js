@@ -82,7 +82,6 @@ const Signup = ()=>{
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoFocus
-                  autoComplete = "name"
                   autoComplete="given-name"
                   name="first_name"
                   fullWidth

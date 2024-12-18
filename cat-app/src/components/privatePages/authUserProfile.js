@@ -25,7 +25,7 @@ const AuthUserProfile = ()=>{
             }
         }
         getProfile()
-    },[getUserProfile, user])
+    },[])
     return <Box>
         <Link href="#/user/edit" color="inherit" display="block" textAlign="right" underline="none">
             <Button variant="outlined" startIcon={<SettingsIcon/>}>Edit Your Info</Button>

@@ -4,7 +4,7 @@ cd cat-app
 npm run build
 # return to main folder
 cd - 
-pip install -r requirements.txt
+#pip install -r requirements.txt
 python3 manage.py makemigrations --no-input 
 python3 manage.py migrate --no-input
 # run server

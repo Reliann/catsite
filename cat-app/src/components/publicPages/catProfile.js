@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActions, CardContent, CardMedia, Collapse, Typography } from "@mui/material"
+import { Avatar, Typography } from "@mui/material"
 
 import { Box } from "@mui/system"
 import { Link } from "@mui/material"

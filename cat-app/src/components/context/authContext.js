@@ -35,7 +35,7 @@ export const AuthProvider = ({children})=>{
             }
         }
         setUser(authTokens?jwt_decode(authTokens.access):null)
-    },[authTokens, rememberMe, user])
+    },[authTokens])
 
     let context_data = {
         user:user,

@@ -37,7 +37,7 @@ const EditCat = ()=>{
             }
         }
         fetchData()
-    },[getCat, id, message])
+    },[])
 
     const customSubmit = async(e)=>{
         e.preventDefault()

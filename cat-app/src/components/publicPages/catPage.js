@@ -48,7 +48,7 @@ const CatPage = ()=>{
     // try to get acsses as the logged user, with a passkey or owner
     // and...do this every time the id change (the url param)
         pre_fetch()
-    },[id,pre_fetch])
+    },[id])
     const resetMessage = ()=>{
         setMessage({passkey:"", detail:""})
     }
