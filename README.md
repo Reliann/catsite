@@ -1,5 +1,5 @@
 # catsite
 This project is a django-server with react frontend.
-you can view it here >> https://catlogs.herokuapp.com/#
+you can view a live version of it here >> [GARY-LOGS](https://gary-logs.up.railway.app/) <<
 
-you can also feed my cats if you like! >> https://catlogs.herokuapp.com/#/users/Reliann the passkey is 1234 for both.
+You can also feed my cats if you like! >> GARY << the passkey is 1234.
