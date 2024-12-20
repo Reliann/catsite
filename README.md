@@ -1,5 +1,5 @@
 # catsite
-This project is a django-server with react frontend.
-you can view a live version of it here >> [GARY-LOGS](https://gary-logs.up.railway.app/) <<
+This project is a django-server + react frontend. It's a website to track a cat's feeding times!
 
-You can also feed my cats if you like! >> GARY << the passkey is 1234.
+
+Feed my cat!  [>> GARY <<](https://gary-logs.up.railway.app/#/cats/MM3oMiRU )  **Passkey is 1234.**
